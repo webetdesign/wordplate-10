@@ -12,7 +12,15 @@
 declare(strict_types=1);
 
 if (!function_exists('env')) {
-    function env(string $key, mixed $default = null): mixed
+    /**
+     * Gets the value of an environment variable.
+     *
+     * @param string $key
+     * @param mixed $default
+     *
+     * @return mixed
+     */
+    function env($key, $default = null)
     {
         $value = $_ENV[$key] ?? false;
 
@@ -32,7 +40,7 @@ if (!function_exists('env')) {
                 return '';
             case 'null':
             case '(null)':
-                return null;
+                return;
         }
 
         if (preg_match('/\A([\'"])(.*)\1\z/', $value, $matches)) {

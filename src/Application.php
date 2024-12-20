@@ -13,15 +13,19 @@ declare(strict_types=1);
 
 namespace WordPlate;
 
-use Dotenv\Dotenv;
-
 class Application
 {
-    protected string|null $publicPath = null;
+    /** @var string */
+    protected $basePath;
 
-    public function __construct(protected string $basePath)
+    /** @var string|null */
+    protected $publicPath;
+
+    public function __construct(string $basePath)
     {
-        Dotenv::createImmutable($this->basePath)->safeLoad();
+        $this->basePath = $basePath;
+
+        \Dotenv\Dotenv::createImmutable($this->basePath)->safeLoad();
     }
 
     public function run(): void
